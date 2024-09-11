@@ -12,7 +12,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
       try {
 
-        const response = await fetch('https://pc-backend-17gq.onrender.com/api/users/verify', {
+        const response = await fetch('http://localhost:5001/api/users/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
