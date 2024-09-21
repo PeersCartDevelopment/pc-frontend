@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../../../util/getApiUrl';
 
 export const Register = () => {
   const { register, watch, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onBlur" });
   const [showPassword, setShowPassword] = useState(false);
-  const [ loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [registerError, setRegisterError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -15,8 +16,9 @@ export const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      setLoading(true); 
-      const response = await fetch('http://localhost:5001/api/users/register', {
+      setLoading(true);
+      console.log('Register data:', data); // Debug log
+      const response = await fetch(`${getApiUrl()}/api/users/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -32,12 +34,15 @@ export const Register = () => {
       } else {
         setLoading(false);
         const errorData = await response.json();
+        console.log('Register error:', errorData); // Debug log
         setRegisterError(errorData.error || 'Registration failed');
         setSuccessMessage('');
       }
     } catch (error) {
+      console.error('Error during registration:', error); // Debug log
       setRegisterError('Error: ' + error.message);
       setSuccessMessage('');
+      setLoading(false);
     }
   };
 

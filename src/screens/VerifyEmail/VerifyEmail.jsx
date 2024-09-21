@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { getApiUrl } from '../../../util/getApiUrl';
 
 const VerifyEmail = () => {
   const {token} = useParams()
@@ -12,7 +13,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
       try {
 
-        const response = await fetch('http://localhost:5001/api/users/verify', {
+        const response = await fetch(`${getApiUrl()}/api/users/verify`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../../../util/getApiUrl';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onBlur" });
@@ -11,19 +12,22 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:5001/api/users/login', {
+      console.log('Login data:', data); // Debug log
+      const response = await fetch(`${getApiUrl()}/api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-
+  
       if (response.ok) {
         const result = await response.json();
+        console.log('Login successful:', result); // Debug log
         localStorage.setItem('token', result.token);
         localStorage.setItem('user', JSON.stringify(result.user));
         navigate('/home');
       } else {
         const errorData = await response.json();
+        console.log('Login error:', errorData); // Debug log
         setLoginError(errorData.message);
       }
     } catch (error) {
@@ -31,7 +35,7 @@ const Login = () => {
       setLoginError('An error occurred. Please try again.');
     }
   };
-
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
