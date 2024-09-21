@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getApiUrl } from '../../../util/getApiUrl';
+
 
 const VerifyEmail = () => {
   const {token} = useParams()
