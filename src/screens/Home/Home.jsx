@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getApiUrl } from '../../../util/getApiUrl';
 
 const Home = () => {
   const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ const Home = () => {
   const handleDeleteAccount = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post('/api/users/request-delete-account', {}, {
+      await axios.post(`${getApiUrl()}/api/users/request-delete-account`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
