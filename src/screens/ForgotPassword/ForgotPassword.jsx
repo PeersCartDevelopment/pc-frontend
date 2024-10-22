@@ -1,20 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import "./forgotpassword.css";
 
 export const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(false);
-
-    const handleSendCode = async () => {
-        setLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
-            alert("Verification code sent!");
-        }, 2000);
-    };
-
     return (
         <div className="forgot-password">
             <div className="div">
@@ -64,37 +51,26 @@ export const ForgotPassword = () => {
                                     </p>
                                     <div className="textfield">
                                         <img className="img-2" alt="Form left icons mail" src="/img/form-left-icons-mail.svg"/>
-                                        <input
-                                            type="email"
-                                            className="placeholder"
-                                            placeholder="Enter email address"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                    </div>
+                                    <div className="placeholder">Enter email address</div>
                                 </div>
                             </div>
-                            <div className="frame-4">
-                                <div className="buttons">
-                                    <button className="text-wrapper-4" onClick={handleSendCode} disabled={loading}>
-                                        {loading ? "Sending..." : "Send Code"}
-                                    </button>
-                                </div>
+                        </div>
+                        <div className="frame-4">
+                            <div className = "buttons">
+                                <div className="text-wrapper-4">Send Code</div>
                             </div>
-                            <div className="frame-2">
-                                <div className="text-wrapper-5">Already have an account?</div>
-                                <div className="div-wrapper">
-                                    <Link to="/login">
-                                        <button className="text-wrapper-6">Sign In</button>
-                                    </Link>
-                                </div>
+                        </div>
+                        <div className="frame-2">
+                            <div className="text-wrapper-5">Already have an account?</div>
+                            <div className="div-wrapper">
+                                <div className="text-wrapper-6">Sign In</div>
                             </div>
                         </div>
                     </div>
                 </div>
+                </div>
+                </div>
             </div>
-        </div>
-    );
-};
-
+    )
+}
 export default ForgotPassword;

@@ -1,7 +1,7 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './style.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { getApiUrl } from '../../../util/getApiUrl';
 
 const Login = () => {
@@ -131,6 +131,11 @@ const Login = () => {
                       />
                     </div>
                     {errors.password && <p className="error">{errors.password.message}</p>}
+                    <div className="text-wrapper-fp">
+                      <Link to="/forgot-password">
+                        <button className="forgot-password-button">Forgot Password</button>
+                      </Link>
+                    </div>
                   </div>
                   {loginError && <p className="error">{loginError}</p>}
                   <div className="frame-3">
