@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm install
-          npm run build  # Ensure this command generates your production-ready files in `build/`
+          npm run dist  # Ensure this command generates your production-ready files in `dist/`
 
       - name: Deploy to S3
         env:
@@ -29,4 +29,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "ap-south-1"  # Replace with your AWS region
         run: |
-          aws s3 sync build/ s3://peerscart-frontend --delete
+          aws s3 sync dist/ s3://peerscart-frontend --delete
