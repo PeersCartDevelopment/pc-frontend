@@ -1,0 +1,32 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - main  # Or your specific deployment branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Ensure this matches your project’s Node version
+
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build  # Ensure this command generates your production-ready files in `build/`
+
+      - name: Deploy to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"  # Replace with your AWS region
+        run: |
+          aws s3 sync build/ s3://peerscart-frontend --delete
