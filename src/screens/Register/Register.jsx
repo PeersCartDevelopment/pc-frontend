@@ -1,6 +1,6 @@
 import  { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import './style.css';
+import './register.css';
 import { useNavigate } from 'react-router-dom';
 import { getApiUrl } from '../../../util/getApiUrl';
 
