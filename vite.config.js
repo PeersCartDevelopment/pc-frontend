@@ -11,7 +11,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://13.210.211.232', // Your backend API URL
+        target: 'https://pcbackend-7g1k.onrender.com', // Your backend API URL
         changeOrigin: true,
         secure: false, // Use true if the backend API supports HTTPS, otherwise use false
       },
